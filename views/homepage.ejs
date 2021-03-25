@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMeme</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/card.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">XMeme</label>
+        <ul>
+            <li><a class="active" href="/">Home</a></li>
+            <li><a href="/add-meme">Share Your Meme</a></li>
+            <li><a href="/swagger-ui">Swagger Documentation</a></li>
+        </ul>
+    </nav>
+
+    <!-- Display all the memes -->
+
+    <% if(memes.length>0){ %>
+        <% for(let i=0; i< memes.length; i++){ %>
+            <div class="card">
+                <img src="<%=memes[i].url %>" alt="Meme" style="width:100%">
+                <div class="container">
+                    <h2><b>
+                            <%=memes[i].name %>
+                        </b></h2>
+                    <p>
+                        <%=memes[i].caption %>
+                    </p>
+                    <form method="post" action="/memes/<%=memes[i].id %>?_method=DELETE">
+                        <input type="submit" name="_method" value="DELETE" id="deleteButton">
+                    </form>
+                </div>
+            </div>
+            <% } %>
+                <% }else{ %>
+                    <h1 id="error">Sorry! But we don't have any memes to show</h1>
+                    <h1 id="error">Click on Share Your Meme option in the top right corner to be the first one</h1>
+                    <% } %>
+</body>
+
+</html>
